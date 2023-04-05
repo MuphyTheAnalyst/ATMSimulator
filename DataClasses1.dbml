@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ATM" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-IA1942L\SQL2022;Initial Catalog=ATM;Integrated Security=True" SettingsObjectName="ATMSimulator.Properties.Settings" SettingsPropertyName="ATMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Accounts" Member="Accounts">
+    <Type Name="Account">
+      <Column Name="AccountNumber" Type="System.String" DbType="NVarChar(6) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+      <Association Name="Customer_Account" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customers" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="CustomerID" Type="System.String" DbType="NVarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Customer_Account" Member="Accounts" ThisKey="CustomerID" OtherKey="CustomerID" Type="Account" />
+      <Association Name="Customer_Customer" Member="Customer2" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" Cardinality="One" />
+      <Association Name="Customer_Customer" Member="Customer1" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DailyBalances" Member="DailyBalances">
+    <Type Name="DailyBalance">
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ATMBalance" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.Searchbydate" Method="Searchbydate">
+    <Parameter Name="startdate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="enddate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="SearchbydateResult">
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Tempsearchbydate" Method="Tempsearchbydate">
+    <Parameter Name="startdate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="enddate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="TempsearchbydateResult">
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Instempsearchbydate" Method="Instempsearchbydate">
+    <Parameter Name="Date" Parameter="date" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ATMBalance" Parameter="aTMBalance" Type="System.Decimal" DbType="Decimal(15,2)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.InsAtmBalance" Method="InsAtmBalance">
+    <Parameter Name="Date" Parameter="date" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ATMBalance" Parameter="aTMBalance" Type="System.Decimal" DbType="Decimal(15,2)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uptAtmBalance" Method="uptAtmBalance">
+    <Parameter Name="startdate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="enddate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ATMBalance" Parameter="aTMBalance" Type="System.Decimal" DbType="Decimal(15,2)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.upAtmBalance" Method="upAtmBalance">
+    <Parameter Name="sdate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ATMBalance" Parameter="aTMBalance" Type="System.Decimal" DbType="Decimal(15,2)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SuptBalance" Method="SuptBalance">
+    <Parameter Name="sdate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ATMBalance" Parameter="aTMBalance" Type="System.Decimal" DbType="Decimal(15,2)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SearchBalance" Method="SearchBalance">
+    <Parameter Name="sdate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="SearchBalanceResult">
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
