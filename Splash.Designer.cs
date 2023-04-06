@@ -91,7 +91,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(156, 25);
             this.label4.TabIndex = 1;
-            this.label4.Text = "TAIWO AJAYI";
+            this.label4.Text = "Olajide Usman";
             // 
             // Splash
             // 
